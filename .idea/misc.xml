@@ -9,6 +9,7 @@
         <option value="$PROJECT_DIR$/ms-andesstay-notify/pom.xml" />
         <option value="$PROJECT_DIR$/ms-andesstay-audit/pom.xml" />
         <option value="$PROJECT_DIR$/ms-andesstay-report/pom.xml" />
+        <option value="$PROJECT_DIR$/ms-andesstay-bff/pom.xml" />
       </list>
     </option>
   </component>
