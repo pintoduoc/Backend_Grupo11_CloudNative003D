@@ -32,16 +32,20 @@ public class Reserva {
         CANCELADA
     }
     @NotNull
-    private Long idHabitacion;
+    private String nombreHabitacion;
+
+    @NotNull
+    private String nombreHuesped;
 
     @Nullable
     private String detalles;
+
+    @NotNull
+    private Long cantidadHuespedes;
 
     @NotNull
     private Date fechaInicio;
 
     @NotNull
     private Date fechaTermino;
-
-    //private Long idCliente; //Configurar para azure (no tengo idea como funciona)
 }

@@ -35,12 +35,14 @@ public class ReservaController {
     Crear Reserva. Se debe enviar la reserva en el cuerpo de la solicitud.
 
     El cuerpo debe contener todos los campos de la reserva, excepto el id y detalles (opcional).
-    Los campos a ingresar son: estado, idHabitacion, detalles (opcional) fechaInicio y fechaTermino.
+    Los campos a ingresar son: estado, nombreHabitacion, nombreHuesped, detalles (opcional), cantidadHuespedes, fechaInicio y fechaTermino.
     Ejemplo de cuerpo de solicitud:
     {
         "estado": "EN_ESTADIA",
-        "idHabitacion": 1,
+        "nombreHabitacion": "Cabaña Los Andes",
+        "nombreHuesped": "Juan Pérez",
         "detalles": "Detalles de la reserva",
+        "cantidadHuespedes": 4,
         "fechaInicio": "2023-09-01",
         "fechaTermino": "2023-09-05"
     }
