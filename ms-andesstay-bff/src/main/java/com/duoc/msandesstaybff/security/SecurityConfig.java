@@ -2,6 +2,7 @@ package com.duoc.msandesstaybff.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
@@ -19,6 +20,8 @@ public class SecurityConfig {
 
                 // Reglas de autorización
                 .authorizeExchange(exchanges -> exchanges
+                        // Permite que el navegador consulte las reglas CORS sin enviar un JWT
+                        .pathMatchers(HttpMethod.OPTIONS).permitAll()
                         // Permite acceso público solo al endpoint de salud/actuator si existiera
                         .pathMatchers("/actuator/health").permitAll()
 
