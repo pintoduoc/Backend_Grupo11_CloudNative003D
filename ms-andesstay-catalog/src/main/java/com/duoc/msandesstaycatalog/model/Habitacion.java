@@ -18,7 +18,13 @@ public class Habitacion {
     private Long id;
 
     @NotNull
-    private String direccion; //Calle y numero
+    private String nombre; // Nombre de la habitación
+
+    @NotNull
+    private String direccion; //Calle numero, comuna.
+
+    @Nullable
+    private String numeroHabitacion; //Número de habitación, opcional.
 
 
     @NotNull
@@ -29,14 +35,8 @@ public class Habitacion {
         CABANA
     }
 
-    @Nullable
-    private Long numeroHabitacion;
-
     @NotNull
-    private Integer unidadesRestantes;
-
-    @NotNull
-    private Integer unidadesTotales;
+    private Long capacidad;
 
     @NotNull
     private boolean disponibilidad;

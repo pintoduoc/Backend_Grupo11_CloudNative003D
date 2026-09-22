@@ -11,7 +11,9 @@ public interface HabitacionRepository extends JpaRepository<Habitacion, Long> {
 
     List<Habitacion> findByDireccion(String direccion);
 
-    List<Habitacion> findByNumeroHabitacion(Long numeroHabitacion);
+    List<Habitacion> findByNombre(String nombre);
+
+    List<Habitacion> findByCapacidad(Long capacidad);
 
     List<Habitacion> findByDisponibilidad(Boolean disponibilidad);
 }

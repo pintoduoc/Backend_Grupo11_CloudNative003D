@@ -28,8 +28,12 @@ public class HabitacionService {
         return habitacionRepository.findByTipo(tipo);
     }
 
-    public List<Habitacion> findByNumeroHabitacion(Long numeroHabitacion){
-        return habitacionRepository.findByNumeroHabitacion(numeroHabitacion);
+    public List<Habitacion> findByCapacidad(Long capacidad){
+        return habitacionRepository.findByCapacidad(capacidad);
+    }
+
+    public List<Habitacion> findByNombre(String nombre){
+        return habitacionRepository.findByNombre(nombre);
     }
 
     public List<Habitacion> findByDisponibilidad(Boolean disponibilidad) {

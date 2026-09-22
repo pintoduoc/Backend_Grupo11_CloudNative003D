@@ -30,16 +30,23 @@ public class HabitacionController {
     public List<Habitacion> findHabitacionByDireccion(@PathVariable("direccion") String direccion) {
         return habitacionService.findByDireccion(direccion);
     }
+
+    //Obtener todas las habitaciones con el mismo nombre (Ejemplo: /api/catalog/nombre/"Hostal Los Andes")
+    @GetMapping("/nombre/{nombre}")
+    public List<Habitacion> findHabitacionByNombre(@PathVariable("nombre") String nombre) {
+        return habitacionService.findByNombre(nombre);
+    }
+
     //Obtener todas las habitaciones del mismo tipo (Ejemplo: /api/catalog/tipo/CABANA)
     @GetMapping("/tipo/{tipo}")
     public List<Habitacion> findHabitacionByTipo(@PathVariable("tipo") Habitacion.Tipo tipo) {
         return habitacionService.findByTipo(tipo);
     }
 
-    //Obtener todas las habitaciones con el mismo numero de habitacion (Ejemplo: /api/catalog/numeroHabitacion/512)
-    @GetMapping("/numeroHabitacion/{numeroHabitacion}")
-    public List<Habitacion> findHabitacionByNumeroHabitacion(@PathVariable("numeroHabitacion") Long numeroHabitacion) {
-        return habitacionService.findByNumeroHabitacion(numeroHabitacion);
+    //Obtener todas las habitaciones con la misma capacidad (Ejemplo: /api/catalog/capacidad/4)
+    @GetMapping("/capacidad/{capacidad}")
+    public List<Habitacion> findHabitacionByCapacidad(@PathVariable("capacidad") Long capacidad) {
+        return habitacionService.findByCapacidad(capacidad);
     }
 
     //Obtener todas las habitaciones con la misma disponibilidad (Ejemplo para obtener todas las habitaciones con disponibilidad: /api/catalog/disponibilidad/true)
@@ -51,15 +58,16 @@ public class HabitacionController {
     Crear Habitacion. Se debe enviar la habitacion en el cuerpo de la solicitud.
 
     El cuerpo debe contener todos los campos de la habitacion, excepto el id y numeroHabitacion (opcional).
-    Los campos a ingresar son: direccion, tipo (HABITACION / CABANA), numeroHabitacion (opcional), unidadesRestantes, unidadesTotales, disponibilidad.
+    Los campos a ingresar son: nombre, direccion, numeroHabitacion (opcional), tipo (HABITACION / CABANA), capacidad, disponibilidad y precio.
     Ejemplo de cuerpo de solicitud:
     {
-        "direccion": "Calle Principal",
+        "nombre": "Hostal Los Andes",
+        "direccion": "Calle Los Andes 123, Peñaflor.",
+        "numeroHabitacion": "512",
         "tipo": "HABITACION",
-        "numeroHabitacion": 512,
-        "unidadesRestantes": 10,
-        "unidadesTotales": 20,
-        "disponibilidad": true
+        "capacidad": 4,
+        "disponibilidad": true,
+        "precio": 45000.00
     }
 */
     @PostMapping
