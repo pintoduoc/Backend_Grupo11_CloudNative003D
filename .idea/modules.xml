@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Backend_Grupo11_CloudNative003D.iml" filepath="$PROJECT_DIR$/Backend_Grupo11_CloudNative003D.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ms-andesstay-catalog/ms-andesstay-catalog.iml" filepath="$PROJECT_DIR$/ms-andesstay-catalog/ms-andesstay-catalog.iml" />
     </modules>
   </component>
 </project>
