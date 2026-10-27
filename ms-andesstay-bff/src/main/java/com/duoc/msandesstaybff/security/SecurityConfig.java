@@ -38,10 +38,11 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST,"/api/reservations/**").hasAnyRole("Recepcionista", "Huesped")
                         .requestMatchers(HttpMethod.DELETE,"/api/reservations/**").hasAnyRole("Recepcionista", "Huesped")
 
-                        // 3. Rutas de Catálogo: Solo Admin
-                        .requestMatchers(HttpMethod.PUT,"/api/catalog/**").hasRole("Admin")
-                        .requestMatchers(HttpMethod.POST,"/api/catalog/**").hasRole("Admin")
-                        .requestMatchers(HttpMethod.DELETE,"/api/catalog/**").hasRole("Admin")
+                        // 3. Rutas de Catálogo y Administración RabbitMQ: Solo Admin
+                        .requestMatchers(HttpMethod.PUT, "/api/catalog/**").hasRole("Admin")
+                        .requestMatchers(HttpMethod.POST, "/api/catalog/**").hasRole("Admin")
+                        .requestMatchers(HttpMethod.DELETE, "/api/catalog/**").hasRole("Admin")
+                        .requestMatchers("/api/rabbitmq/**").hasRole("Admin")
 
                         // 4. Para todas las demás consultas GET, solo basta con estar autenticado
                         .anyRequest().authenticated()
@@ -68,7 +69,10 @@ public class SecurityConfig {
 
     private CorsConfiguration CorsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("https://frontend-cloudnative.vercel.app")); //Dominio de Frontend Vercel
+        config.setAllowedOrigins(List.of(
+                "https://frontend-cloudnative.vercel.app",
+                "http://localhost:5173"
+        ));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("Authorization", "Content-Type", "origin", "accept"));
         return config;

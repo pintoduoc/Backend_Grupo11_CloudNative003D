@@ -1,11 +1,9 @@
 package com.duoc.msandesstayreservations.model;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.antlr.v4.runtime.misc.NotNull;
 
 import java.util.Date;
 
@@ -19,7 +17,7 @@ public class Reserva {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Estado estado;
 
@@ -31,21 +29,21 @@ public class Reserva {
         CHECKOUT,
         CANCELADA
     }
-    @NotNull
+    @Column(nullable = false)
     private String nombreHabitacion;
 
-    @NotNull
+    @Column(nullable = false)
     private String nombreHuesped;
 
-    @Nullable
+    @Column(nullable = true)
     private String detalles;
 
-    @NotNull
+    @Column(nullable = false)
     private Long cantidadHuespedes;
 
-    @NotNull
+    @Column(nullable = false)
     private Date fechaInicio;
 
-    @NotNull
+    @Column(nullable = false)
     private Date fechaTermino;
 }

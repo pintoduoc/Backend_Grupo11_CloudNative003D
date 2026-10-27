@@ -1,0 +1,30 @@
+# Compilación Maven
+target/
+**/target/
+*.jar
+*.war
+*.class
+
+# Archivos de IDE (IntelliJ, VS Code, Eclipse)
+.idea/
+**/.idea/
+.junie/
+**/.junie/
+*.iml
+**/*.iml
+.vscode/
+.settings/
+.project
+.classpath
+
+# Sistema Operativo y Logs
+.DS_Store
+Thumbs.db
+*.log
+
+# Secretos, Wallets de Oracle y Variables de Entorno
+.env
+*.env
+Wallet_*/
+**/Wallet_*/
+wallet/

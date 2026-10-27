@@ -1,0 +1,41 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: ms-andesstay-notify
+  rabbitmq:
+    # Soporta múltiples nodos del clúster separados por coma (failover automático)
+    addresses: ${RABBITMQ_ADDRESSES:localhost:5672,localhost:5673}
+    username: ${RABBITMQ_USER:andesstay}
+    password: ${RABBITMQ_PASS:andesstay123}
+    listener:
+      simple:
+        acknowledge-mode: manual   # Confirmación explícita vía Channel
+        prefetch: 1                # Procesa 1 mensaje a la vez por consumidor
+        default-requeue-rejected: false
+
+# Nombres centralizados de colas, exchanges y routing keys
+app:
+  rabbitmq:
+    exchanges:
+      direct: cmd.direct
+      topic: cmd.topic
+      dlx: cmd.dead.dlx
+    queues:
+      email: q.cmd.email
+      email-dlq: q.cmd.email.dlq
+      housekeeping: q.cmd.housekeeping
+      housekeeping-dlq: q.cmd.housekeeping.dlq
+      voucher: q.cmd.voucher
+      voucher-dlq: q.cmd.voucher.dlq
+    routing:
+      email-direct: email.send
+      email-topic: "email.*"
+      email-dlq: email.dead
+      housekeeping-direct: housekeeping.ticket
+      housekeeping-topic: "housekeeping.#"
+      housekeeping-dlq: housekeeping.dead
+      voucher-direct: voucher.gen
+      voucher-topic: "voucher.*"
+      voucher-dlq: voucher.dead

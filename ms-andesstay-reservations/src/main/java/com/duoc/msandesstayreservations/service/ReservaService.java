@@ -1,5 +1,6 @@
 package com.duoc.msandesstayreservations.service;
 
+import com.duoc.msandesstayreservations.messaging.ReservationEventPublisher;
 import com.duoc.msandesstayreservations.model.Reserva;
 import com.duoc.msandesstayreservations.repositories.ReservaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,9 @@ import java.util.List;
 public class ReservaService {
     @Autowired
     private ReservaRepository reservaRepository;
+
+    @Autowired
+    private ReservationEventPublisher eventPublisher;
 
     public List<Reserva> findAll() {
         return reservaRepository.findAll();
@@ -25,7 +29,9 @@ public class ReservaService {
     }
 
     public Reserva save(Reserva reserva) {
-        return reservaRepository.save(reserva);
+        Reserva saved = reservaRepository.save(reserva);
+        eventPublisher.publishReservationEvent(saved, "RESERVA_CREADA");
+        return saved;
     }
 
     public void deleteById(Long id) {
@@ -36,7 +42,9 @@ public class ReservaService {
         Reserva reserva = reservaRepository.findById(id).orElse(null);
         if (reserva != null) {
             reserva.setEstado(estado);
-            return reservaRepository.save(reserva);
+            Reserva updated = reservaRepository.save(reserva);
+            eventPublisher.publishReservationEvent(updated, "ESTADO_ACTUALIZADO");
+            return updated;
         }
         return null;
     }

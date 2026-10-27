@@ -1,11 +1,9 @@
 package com.duoc.msandesstaycatalog.model;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.antlr.v4.runtime.misc.NotNull;
 
 @Entity
 @Data
@@ -17,17 +15,17 @@ public class Habitacion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @Column(nullable = false)
     private String nombre; // Nombre de la habitación
 
-    @NotNull
+    @Column(nullable = false)
     private String direccion; //Calle numero, comuna.
 
-    @Nullable
+    @Column(nullable = true)
     private String numeroHabitacion; //Número de habitación, opcional.
 
 
-    @NotNull
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Tipo tipo;
     public enum Tipo {
@@ -35,12 +33,12 @@ public class Habitacion {
         CABANA
     }
 
-    @NotNull
+    @Column(nullable = false)
     private Long capacidad;
 
-    @NotNull
+    @Column(nullable = false)
     private boolean disponibilidad;
 
-    @NotNull
+    @Column(nullable = false)
     private Double precio;
 }

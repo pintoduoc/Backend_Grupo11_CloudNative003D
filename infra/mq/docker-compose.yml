@@ -1,0 +1,55 @@
+services:
+  rabbitmq-1:
+    image: rabbitmq:3.13-management
+    container_name: andesstay-rabbitmq-1
+    hostname: rabbitmq-1
+    ports:
+      - "5672:5672"   # AMQP Nodo 1
+      - "15672:15672" # Management UI Nodo 1 (http://localhost:15672)
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "ANDESSTAY_SECRET_CLUSTER_COOKIE_2026"
+      RABBITMQ_DEFAULT_USER: "andesstay"
+      RABBITMQ_DEFAULT_PASS: "andesstay123"
+    volumes:
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf:ro
+      - rabbitmq1_data:/var/lib/rabbitmq
+    networks:
+      - andesstay-mq-net
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  rabbitmq-2:
+    image: rabbitmq:3.13-management
+    container_name: andesstay-rabbitmq-2
+    hostname: rabbitmq-2
+    depends_on:
+      rabbitmq-1:
+        condition: service_healthy
+    ports:
+      - "5673:5672"   # AMQP Nodo 2
+      - "15673:15672" # Management UI Nodo 2 (http://localhost:15673)
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "ANDESSTAY_SECRET_CLUSTER_COOKIE_2026"
+      RABBITMQ_DEFAULT_USER: "andesstay"
+      RABBITMQ_DEFAULT_PASS: "andesstay123"
+    volumes:
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf:ro
+      - rabbitmq2_data:/var/lib/rabbitmq
+    networks:
+      - andesstay-mq-net
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  rabbitmq1_data:
+  rabbitmq2_data:
+
+networks:
+  andesstay-mq-net:
+    driver: bridge
